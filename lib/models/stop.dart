@@ -63,7 +63,7 @@ Future<List<Stop>> fetchStops(String lineId) async {
     
     if (response.statusCode == 200) {
       var responseJson = jsonDecode(response.body);
-       return (responseJson as List).map((p) => Stop.fromJson(p)).toSet().toList(); 
+       return (responseJson as List).map((p) => Stop.fromJson(p)).toSet().toList();   
     }
     else {
     throw Exception('Failed to load album');
