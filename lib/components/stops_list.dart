@@ -43,8 +43,13 @@ class _StopListState extends State<StopList>{
                 return ListView.builder(
                   itemCount: snapshot.data.length,
                   itemBuilder: (context, index) {
-                      return Text(snapshot.data[index].stationName);
-                    }
+                     return StopListItem(
+                              snapshot.data[index].stationName,
+                              snapshot.data[index].stationDescriptiveName,
+                              snapshot.data[index].stopId,
+                              snapshot.data[index].ada
+                            );
+                      }
                     );
                   }
                   else if (snapshot.hasError) {
@@ -56,4 +61,24 @@ class _StopListState extends State<StopList>{
     )
     );
   }           
+}
+
+class StopListItem extends StatelessWidget{
+  final String stationName;
+  final String stationDescriptiveName;
+  final int stopId;
+  final bool ada;
+
+  const StopListItem(this.stationName, this.stationDescriptiveName, this.stopId,this.ada);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5.0),
+      child: ListTile(
+              leading: Icon(Icons.train),
+              title: new Text(stationName),
+        )
+      );
+    }
 }
