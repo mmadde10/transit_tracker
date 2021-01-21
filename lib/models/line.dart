@@ -20,17 +20,19 @@ class Rgb {
 
 class Line {
   final String id;
+  final String lineId;
   final String name;
   final String longName;
   final String description;
   final Rgb rgb; 
 
 
-  Line({this.id, this.name, this.longName, this.description, this.rgb});
+  Line({this.id,this.lineId, this.name, this.longName, this.description, this.rgb});
 
   factory Line.fromJson(Map<String, dynamic> json) =>
     Line(
      id: json["id"],
+     lineId: json["lineId"],
      name: json["name"],
      longName:json["longName"],
      description:json["description"],
@@ -38,11 +40,11 @@ class Line {
     );
 
     Map<dynamic, dynamic> toJson() => {
-      "id":id, "name":name, longName: "longName", description: "description"
+      "id":id, "lineId": lineId ,"name":name, longName: "longName", description: "description"
     };
 }
 
-Future<List<Line>> fetchLine() async {
+Future<List<Line>> fetchLine(http.Client client) async {
   final response = await http.get('https://transit-14c18.uc.r.appspot.com/api/lines');
 
   if (response.statusCode == 200) {
@@ -50,6 +52,6 @@ Future<List<Line>> fetchLine() async {
 
     return (responseJson as List).map((p) => Line.fromJson(p)).toList(); 
   } else {
-    throw Exception('Failed to load album');
+    throw Exception('Failed to get lines');
   }
 }

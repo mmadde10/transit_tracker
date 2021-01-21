@@ -19,7 +19,8 @@ class _LineListState extends State<LineList>{
   @override
   void initState() {
     super.initState();
-    futureLine = fetchLine();
+    http.Client client = new http.Client();
+    futureLine = fetchLine(client);
   }
 
   @override
@@ -33,6 +34,7 @@ class _LineListState extends State<LineList>{
                   itemCount: snapshot.data.length,
                   itemBuilder: (context, index) {
                     return CustomListItem(
+                      snapshot.data[index].lineId,
                       snapshot.data[index].name, 
                       snapshot.data[index].description, 
                       snapshot.data[index].rgb.red, 
@@ -54,6 +56,7 @@ class _LineListState extends State<LineList>{
 
 class CustomListItem extends StatelessWidget {
 
+  final String lineId;
   final String name;
   final String longName;
   final String description;
@@ -62,7 +65,7 @@ class CustomListItem extends StatelessWidget {
   final int blue;
 
 
-  const CustomListItem(this.name,this.description, this.red, this.green, this.blue, this.longName);
+  const CustomListItem(this.lineId,this.name,this.description, this.red, this.green, this.blue, this.longName);
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +78,7 @@ class CustomListItem extends StatelessWidget {
          onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => StopList(lineName: name, lineCode: 'brn',))
+              MaterialPageRoute(builder: (context) => StopList(lineName: longName, lineCode: lineId, lineColor:Color.fromRGBO(red, green, blue, 1.0)))
             );
          },
       )

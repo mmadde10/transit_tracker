@@ -66,6 +66,6 @@ Future<List<Stop>> fetchStops(String lineId) async {
        return (responseJson as List).map((p) => Stop.fromJson(p)).toSet().toList();   
     }
     else {
-    throw Exception('Failed to load album');
+    throw Exception('Failed to get Stops');
   }
 }
