@@ -6,19 +6,25 @@ class Arrival {
   final String arrivalTime;
   final String destinationName;
   final String destinationSt;
+  final String routeColor;
+  final String isApproaching;
+  final String isDelayed;
   final String runNumber;
   final String stationName;
   final String stationDeparture;
   final String predictedTime;
 
-  Arrival({this.arrivalTime, this.destinationName, this.destinationSt, this.runNumber, this.stationName, this.stationDeparture, this.predictedTime});
+  Arrival({this.arrivalTime, this.destinationName, this.destinationSt,this.routeColor, this.isApproaching, this.isDelayed, this.runNumber, this.stationName, this.stationDeparture, this.predictedTime});
 
 
   factory Arrival.fromJson(Map<String, dynamic> json) =>
     Arrival(
-      arrivalTime:json["arrt"],
+      arrivalTime: json["arrt"],
       destinationName: json["destNm"],
       destinationSt: json["destSt"],
+      routeColor: json["rt"],
+      isApproaching: json["isApp"],
+      isDelayed: json["isDly"],
       runNumber: json["rn"],
       stationName: json["staNm"],
       stationDeparture: json["stpDe"],
@@ -26,7 +32,16 @@ class Arrival {
     );
 
   Map<dynamic, dynamic> toJson() => {
-    "arrt": arrivalTime, "destNm": destinationName, "destSt": destinationSt, "rn": runNumber, "staNm": stationName, "stpDe": stationDeparture, "prdt": predictedTime
+    "arrt": arrivalTime, 
+    "destNm": destinationName, 
+    "destSt": destinationSt, 
+    "rn": runNumber, 
+    "rt":routeColor,
+    "isApp": isApproaching,
+    "isDly": isDelayed,
+    "staNm": stationName, 
+    "stpDe": stationDeparture, 
+    "prdt": predictedTime
   };
 }
 

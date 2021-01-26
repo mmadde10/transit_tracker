@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:equatable/equatable.dart';
 import 'package:http/http.dart' as http;
 
 class Rgb {
@@ -18,7 +19,7 @@ class Rgb {
   
 }
 
-class Line {
+class Line extends Equatable{
   final String id;
   final String lineId;
   final String name;
@@ -42,6 +43,15 @@ class Line {
     Map<dynamic, dynamic> toJson() => {
       "id":id, "lineId": lineId ,"name":name, longName: "longName", description: "description"
     };
+
+  @override
+  List<Object> get props => [
+    id,
+    lineId,
+    name, 
+    longName,
+    description
+  ];
 }
 
 Future<List<Line>> fetchLine(http.Client client) async {

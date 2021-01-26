@@ -21,14 +21,12 @@ class _ArrivalGridState extends State<ArrivalGrid>{
   final Color lineColor;
 
   _ArrivalGridState(this.stationName, this.stopId, this.lineColor);
-  
 
   @override
   void initState(){
     super.initState();
     futureArrival = fetchArrivals(stopId);
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +48,10 @@ class _ArrivalGridState extends State<ArrivalGrid>{
                   snapshot.data[index].arrivalTime,
                   snapshot.data[index].destinationName,
                   snapshot.data[index].predictedTime,
-                  snapshot.data[index].stationDeparture);
+                  snapshot.data[index].stationDeparture,
+                  snapshot.data[index].routeColor,
+                  snapshot.data[index].isApproaching,
+                  snapshot.data[index].isDelayed);
               },
             );
            } else if (snapshot.hasError) {
